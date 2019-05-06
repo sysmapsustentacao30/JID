@@ -279,7 +279,8 @@ namespace Sysmap.Sustentacao.JID.Controllers
                         }
                         else
                         {
-                            dateTime = Convert.ToDateTime(date);
+                            var onlyDate = date.Split(" ");
+                            dateTime = Convert.ToDateTime(onlyDate[0]);
                         }
 
                         WexPlan wexPlan = new WexPlan
