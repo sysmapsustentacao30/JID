@@ -62,7 +62,7 @@ namespace Sysmap.Sustentacao.JID.JiraCon
             return listIssues;
         }
 
-        internal dynamic CreateIssue (string urlAtlassin, string username, string password, string project,string jsonData)
+        public dynamic CreateIssue (string urlAtlassin, string username, string password, string project,string jsonData)
         {
             dynamic issue = null;
             try
