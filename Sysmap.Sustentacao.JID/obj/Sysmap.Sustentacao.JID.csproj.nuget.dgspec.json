@@ -1,0 +1,76 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\GITHUB\\JID\\Sysmap.Sustentacao.JID\\Sysmap.Sustentacao.JID.csproj": {}
+  },
+  "projects": {
+    "C:\\GITHUB\\JID\\Sysmap.Sustentacao.JID\\Sysmap.Sustentacao.JID.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\GITHUB\\JID\\Sysmap.Sustentacao.JID\\Sysmap.Sustentacao.JID.csproj",
+        "projectName": "Sysmap.Sustentacao.JID",
+        "projectPath": "C:\\GITHUB\\JID\\Sysmap.Sustentacao.JID\\Sysmap.Sustentacao.JID.csproj",
+        "packagesPath": "C:\\Users\\marcelo.martins\\.nuget\\packages\\",
+        "outputPath": "C:\\GITHUB\\JID\\Sysmap.Sustentacao.JID\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\marcelo.martins\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://www.myget.org/F/workflow/": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "DotNetCore.NPOI": {
+              "target": "Package",
+              "version": "[1.2.2-preview-56107813, )"
+            },
+            "Microsoft.AspNetCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.1, )",
+              "autoReferenced": true
+            },
+            "Microsoft.AspNetCore.Razor.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.2, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
