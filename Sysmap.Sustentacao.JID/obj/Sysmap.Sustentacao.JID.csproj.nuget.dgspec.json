@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\GITHUB\\JID\\Sysmap.Sustentacao.JID\\Sysmap.Sustentacao.JID.csproj": {}
+    "C:\\RepositoryGitHub\\JID\\Sysmap.Sustentacao.JID\\Sysmap.Sustentacao.JID.csproj": {}
   },
   "projects": {
-    "C:\\GITHUB\\JID\\Sysmap.Sustentacao.JID\\Sysmap.Sustentacao.JID.csproj": {
+    "C:\\RepositoryGitHub\\JID\\Sysmap.Sustentacao.JID\\Sysmap.Sustentacao.JID.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\GITHUB\\JID\\Sysmap.Sustentacao.JID\\Sysmap.Sustentacao.JID.csproj",
+        "projectUniqueName": "C:\\RepositoryGitHub\\JID\\Sysmap.Sustentacao.JID\\Sysmap.Sustentacao.JID.csproj",
         "projectName": "Sysmap.Sustentacao.JID",
-        "projectPath": "C:\\GITHUB\\JID\\Sysmap.Sustentacao.JID\\Sysmap.Sustentacao.JID.csproj",
+        "projectPath": "C:\\RepositoryGitHub\\JID\\Sysmap.Sustentacao.JID\\Sysmap.Sustentacao.JID.csproj",
         "packagesPath": "C:\\Users\\marcelo.martins\\.nuget\\packages\\",
-        "outputPath": "C:\\GITHUB\\JID\\Sysmap.Sustentacao.JID\\obj\\",
+        "outputPath": "C:\\RepositoryGitHub\\JID\\Sysmap.Sustentacao.JID\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -25,8 +25,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://www.myget.org/F/workflow/": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp2.1": {
