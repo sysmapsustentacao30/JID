@@ -26,7 +26,7 @@ namespace Sysmap.Sustentacao.JID.Controllers
         private readonly string urlAtlassin = "https://sysmapsolutions.atlassian.net";
         private readonly string username = "sustentacao@sysmap.com.br";
         private readonly string password = "$u$t3nt4c40";
-        private readonly string projectJira = "FTQPRUD";
+        private readonly string projectJira = "FTQPrudent";
 
         public WexController(IHostingEnvironment hostingEnvironment, IConfiguration configuration)
         {
