@@ -37,7 +37,6 @@ namespace Sysmap.Sustentacao.JID.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var teste = _configuration.GetSection("JiraSettings").GetSection("url").Value;
             ViewBag.Upload = false;
             return View();
         }
@@ -102,7 +101,7 @@ namespace Sysmap.Sustentacao.JID.Controllers
             else
             {
                 //Atualiza as Antigas
-                ViewBag.UpdateIssueQtd = UpdateIssues(listWex, jiraIssues);
+                //ViewBag.UpdateIssueQtd = UpdateIssues(listWex, jiraIssues);
 
                 //Cria as issues Novas.
                 ViewBag.NewIssueQtd = CreateNewIssue(listWex, jiraIssues);
@@ -139,7 +138,7 @@ namespace Sysmap.Sustentacao.JID.Controllers
 
                 string jsonData = "{" +
                       "\"fields\": {" +
-                                        "\"project\": {" + "\"key\": " + "\"" + "FTQPRUD" + "\"" + "}," +
+                                        "\"project\": {" + "\"key\": " + "\"" + projectJira + "\"" + "}," +
                                         "\"summary\": " + "\"" + item.Documento + "\"" + "," +
                                         "\"issuetype\": {" + "\"name\": " + "\"" + issueType + "\"" + "}," +
                                         "\"customfield_19227\": " + "\"" + item.OrdemServico + "\"" + "," +
@@ -168,13 +167,13 @@ namespace Sysmap.Sustentacao.JID.Controllers
                     {
                         string name = Convert.ToString(status.name);
                         string id = Convert.ToString(status.id);
-                        jiraStatusID.Add(name.Replace(" ", ""), id.Replace(" ", ""));
+                        jiraStatusID.Add(name.Replace(" ", "").ToLower(), id.Replace(" ", ""));
                     }
 
 
                     jsonData = "{" +
                                     "\"transition\": {" +
-                                                        "\"id\": " + "\"" + Convert.ToInt32(jiraStatusID["LiberadoQA"]) + "\"" +
+                                                        "\"id\": " + "\"" + Convert.ToInt32(jiraStatusID["liberadoqa"]) + "\"" +
                                                      "}" +
                                "}";
 
@@ -329,34 +328,34 @@ namespace Sysmap.Sustentacao.JID.Controllers
             {
                 string name = Convert.ToString(status.name);
                 string id = Convert.ToString(status.id);
-                jiraStatusID.Add(name.Replace(" ", ""), id.Replace(" ",""));
+                jiraStatusID.Add(name.Replace(" ", "").ToLower(), id.Replace(" ",""));
             }
 
-            switch (statuIssue)
+            switch (statuIssue.Replace(" ", "").ToLower())
             {
-                case "Pacote Devolvido":
+                case "pacotedevolvido":
                     //ID do status Liberado Teste QA
-                    statusID = Convert.ToInt32(jiraStatusID["LiberadoQA"]);
+                    statusID = Convert.ToInt32(jiraStatusID["liberadoqa"]);
                     break;
 
-                case "Em Correção":
+                case "emcorreção":
                     //ID do status Liberado Teste QA
-                    statusID = Convert.ToInt32(jiraStatusID["LiberadoQA"]);
+                    statusID = Convert.ToInt32(jiraStatusID["liberadoqa"]);
                     break;
 
-                case "Liberado UAT":
+                case "liberadouat":
                     //ID do status Reaberto
-                    statusID = Convert.ToInt32(jiraStatusID["Reaberto"]);
+                    statusID = Convert.ToInt32(jiraStatusID["reaberto"]);
                     break;
 
-                case "Cancelado":
+                case "cancelado":
                     //ID do status Backlog
-                    statusID = Convert.ToInt32(jiraStatusID["Backlog"]);
+                    statusID = Convert.ToInt32(jiraStatusID["backlog"]);
                     break;
 
-                case "Em Execução Prudential":
+                case "emexecuçãoprudential":
                     //ID do status Liberado Teste QA
-                    statusID = Convert.ToInt32(jiraStatusID["LiberadoQA"]);
+                    statusID = Convert.ToInt32(jiraStatusID["liberadoqa"]);
                     break;
 
                 default:
