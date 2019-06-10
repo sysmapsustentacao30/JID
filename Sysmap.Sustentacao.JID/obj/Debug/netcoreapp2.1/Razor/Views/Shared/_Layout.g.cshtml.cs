@@ -54,7 +54,7 @@ using Sysmap.Sustentacao.JID.Models;
             WriteLiteral("<!doctype html>\r\n<html lang=\"pt-br\">\r\n");
             EndContext();
             BeginContext(38, 681, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "db4f80a2963e4151b495ed80c02e006e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "49c6df0e02ba44a7a9350f8e28f5e296", async() => {
                 BeginContext(44, 634, true);
                 WriteLiteral(@"
     <!-- Required meta tags -->
@@ -95,7 +95,7 @@ using Sysmap.Sustentacao.JID.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(721, 913, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "129994e43a324918b6bc66db623c0e1a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ea9f403c2d70454a83582439a762a94a", async() => {
                 BeginContext(727, 95, true);
                 WriteLiteral("\r\n    <nav class=\"navbar navbar-dark bg-dark\">\r\n        <a class=\"navbar-brand\" href=\"#\">JID - ");
                 EndContext();

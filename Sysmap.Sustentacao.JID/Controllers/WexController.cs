@@ -26,7 +26,7 @@ namespace Sysmap.Sustentacao.JID.Controllers
         private readonly string urlAtlassin = "https://sysmapsolutions.atlassian.net";
         private readonly string username = "sustentacao@sysmap.com.br";
         private readonly string password = "$u$t3nt4c40";
-        private readonly string projectJira = "FTQPrudent";
+        private readonly string projectJira = "FTQPRUDENT";
 
         public WexController(IHostingEnvironment hostingEnvironment, IConfiguration configuration)
         {
@@ -101,7 +101,7 @@ namespace Sysmap.Sustentacao.JID.Controllers
             else
             {
                 //Atualiza as Antigas
-                //ViewBag.UpdateIssueQtd = UpdateIssues(listWex, jiraIssues);
+                ViewBag.UpdateIssueQtd = UpdateIssues(listWex, jiraIssues);
 
                 //Cria as issues Novas.
                 ViewBag.NewIssueQtd = CreateNewIssue(listWex, jiraIssues);
@@ -143,8 +143,8 @@ namespace Sysmap.Sustentacao.JID.Controllers
                                         "\"issuetype\": {" + "\"name\": " + "\"" + issueType + "\"" + "}," +
                                         "\"customfield_19227\": " + "\"" + item.OrdemServico + "\"" + "," +
                                         "\"customfield_19228\": "  + item.IdWex + "," +
+                                        "\"customfield_13701\": {" + "\"id\": " + "\"" + "-1" + "\"" + "}," +
                                         "\"customfield_19224\": " + "\"" + item.Data.ToString("yyyy-MM-dd") + "\"" +
-
                                   "}" +
                   "}";
 
