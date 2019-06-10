@@ -143,8 +143,8 @@ namespace Sysmap.Sustentacao.JID.Controllers
                                         "\"issuetype\": {" + "\"name\": " + "\"" + issueType + "\"" + "}," +
                                         "\"customfield_19227\": " + "\"" + item.OrdemServico + "\"" + "," +
                                         "\"customfield_19228\": "  + item.IdWex + "," +
+                                        "\"customfield_13701\": {" + "\"id\": " + "\"" + "-1" + "\"" + "}," +
                                         "\"customfield_19224\": " + "\"" + item.Data.ToString("yyyy-MM-dd") + "\"" +
-
                                   "}" +
                   "}";
 
