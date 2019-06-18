@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -24,7 +25,7 @@ namespace Sysmap.Sustentacao.JID.JiraCon
 
             using (var client = new HttpClient())
             {
-                string url = $"{urlAtlassin}/rest/api/2/search?jql=project={project}&fields=summary,issuetype,status,customfield_19227,customfield_19228&maxResults=1000&startAt=0";
+                string url = $"{urlAtlassin}/rest/api/2/search?jql=project={project}&fields=summary,issuetype,status,customfield_19227,customfield_19228&maxResults=100&startAt=0";
 
                 client.DefaultRequestHeaders.Clear();
                 client.BaseAddress = new Uri(url);
@@ -37,25 +38,49 @@ namespace Sysmap.Sustentacao.JID.JiraCon
                 response.EnsureSuccessStatusCode();
 
                 string apiResult = response.Content.ReadAsStringAsync().Result;
+                dynamic result = JsonConvert.DeserializeObject(apiResult);
 
-                dynamic issues = JsonConvert.DeserializeObject(apiResult);
+                int totalIssues = Convert.ToInt32(result.total);
 
-                foreach (var issue in issues.issues)
+                for (int qtdIssue = 0;qtdIssue < totalIssues;)
                 {
-                    if (issue.fields.customfield_19228.Value is null)
+                    using (var clieTwo = new HttpClient())
                     {
-                        issue.fields.customfield_19228 = "0";
+                        url = $"{urlAtlassin}/rest/api/2/search?jql=project={project}&fields=summary,issuetype,status,customfield_19227,customfield_19228&maxResults=100&startAt={qtdIssue}";
+
+                        clieTwo.DefaultRequestHeaders.Clear();
+                        clieTwo.BaseAddress = new Uri(url);
+                        clieTwo.DefaultRequestHeaders.Accept.Add(
+                             new MediaTypeWithQualityHeaderValue("application/json"));
+
+                        clieTwo.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes(credentials)));
+                        response = clieTwo.GetAsync("").Result;
+
+                        response.EnsureSuccessStatusCode();
+
+                        apiResult = response.Content.ReadAsStringAsync().Result;
+
+                        dynamic issues = JsonConvert.DeserializeObject(apiResult);
+                        foreach (var issue in issues.issues)
+                        {
+                            if (issue.fields.customfield_19228.Value is null)
+                            {
+                                issue.fields.customfield_19228 = "0";
+                            }
+                            IssuePrudential jira = new IssuePrudential
+                            {
+                                ID = Convert.ToInt32(issue.id),
+                                Summary = issue.fields.summary,
+                                IssueType = issue.fields.issuetype.name,
+                                ServiceNow = issue.fields.customfield_19227,
+                                WexId = Convert.ToInt32(issue.fields.customfield_19228),
+                                Status = issue.fields.status.name
+                            };
+                            listIssues.Add(jira);
+                        }
                     }
-                    IssuePrudential jira = new IssuePrudential
-                    {
-                        ID = Convert.ToInt32(issue.id),
-                        Summary = issue.fields.summary,
-                        IssueType = issue.fields.issuetype.name,
-                        ServiceNow = issue.fields.customfield_19227,
-                        WexId = Convert.ToInt32(issue.fields.customfield_19228),
-                        Status = issue.fields.status.name
-                    };
-                    listIssues.Add(jira);
+
+                    qtdIssue = listIssues.Count();
                 }
             }
 

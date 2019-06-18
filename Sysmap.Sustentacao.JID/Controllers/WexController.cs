@@ -24,8 +24,8 @@ namespace Sysmap.Sustentacao.JID.Controllers
 
 
         private readonly string urlAtlassin = "https://sysmapsolutions.atlassian.net";
-        private readonly string username = "sustentacao@sysmap.com.br";
-        private readonly string password = "$u$t3nt4c40";
+        private readonly string username = "marcelo.martins@sysmap.com.br";
+        private readonly string password = "#Olecram1";
         private readonly string projectJira = "FTQPRUDENT";
 
         public WexController(IHostingEnvironment hostingEnvironment, IConfiguration configuration)
@@ -34,6 +34,7 @@ namespace Sysmap.Sustentacao.JID.Controllers
             _configuration = configuration;
         }
 
+        #region Index
         [HttpGet]
         public IActionResult Index()
         {
@@ -108,6 +109,7 @@ namespace Sysmap.Sustentacao.JID.Controllers
             }
             return View();
         }
+        #endregion
 
         #region Cria uma issue nova
         private int CreateNewIssue(List<WexPlan> listWex, List<IssuePrudential> jiraIssues)
@@ -200,7 +202,7 @@ namespace Sysmap.Sustentacao.JID.Controllers
 
             var oldIssues = from issue in jiraIssues
                             where listIdWex.Contains(issue.WexId)
-                            select new { issue.ID, issue.Status };
+                            select new { issue.WexId, issue.ID ,issue.Status };
 
 
 
@@ -270,17 +272,17 @@ namespace Sysmap.Sustentacao.JID.Controllers
                     {
                         IRow row = sheet.GetRow(i);
 
-                        string date = row.GetCell(13)?.ToString();
-                        DateTime dateTime = DateTime.Now;
-                        if (date is null)
-                        {
-                            
-                        }
-                        else
-                        {
-                            var onlyDate = date.Split(" ");
-                            dateTime = Convert.ToDateTime(onlyDate[0] + " 01:00:00");
-                        }
+                        //string date = row.GetCell(13)?.ToString();
+                        //DateTime dateTime = DateTime.Now;
+                        //if (date is null)
+                        //{
+
+                        //}
+                        //else
+                        //{
+                        //    var onlyDate = date.Split(" ");
+                        //    dateTime = Convert.ToDateTime(onlyDate[0] + " 01:00:00");
+                        //}
 
                         WexPlan wexPlan = new WexPlan
                         {
@@ -289,7 +291,7 @@ namespace Sysmap.Sustentacao.JID.Controllers
                             Responsavel = row.GetCell(21)?.ToString(),
                             Documento = row.GetCell(5)?.ToString().Replace("\"", ""),
                             Status = row.GetCell(18)?.ToString(),
-                            Data = dateTime
+                            Data = DateTime.Now
 
                         };
 
@@ -316,7 +318,7 @@ namespace Sysmap.Sustentacao.JID.Controllers
         }
         #endregion
 
-        #region Verifica se o status do Jira
+        #region Verifica se o status do Jira deve ser alterado.
         private int GetTransitionIssue(string statuIssue, int issueID)
         {
             int statusID = 0;
