@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewData["Title"] = "UploadExcel";
+}
+
+<h1><i class="fab fa-atlassian"></i> Prudential Automation</h1>
+
+<div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
+    <div class="card-deck">
+
+        <div class="card">
+            <div class="card-header bg-dark text-white ">
+                Upload do arquivo.
+            </div>
+            <div class="card-body">
+                <form enctype="multipart/form-data" asp-action="UploadExcel" asp-controller="Prudential" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @*<div class="form-group">
+                            <label>Quantidade de iccids</label>
+                            <input type="number" id="qtdRow" class="form-control" name="qtdRows">
+                            <small id="qtdRow" class="form-text text-muted">Informe a quantidade de iccids que deseja validar.</small>
+                        </div>*@
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" id="file" name="file">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-info" id="uploadButton"><i class="fas fa-save"></i> Enviar</button> | <a href="@Url.Action("Index","Home")" class="btn btn-secondary"><i class="fas fa-backward"></i> Voltar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@if (ViewBag.Upload)
+{
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Upload Finalizado!</h4>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <ul>
+            <li><h5>Issues Criadas: @ViewBag.QtdCreate</h5></li>
+            <li><h5>Issues Atualizadas: @ViewBag.QtdUpdate</h5></li>
+        </ul>
+    </div>
+}
+
+
+@section scripts{
+
+    <script src="~/js/jquery.loading.block.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+            $('#uploadButton').click(function () {
+                $.loadingBlockShow({
+                    imgPath: '/images/default.svg'
+                });
+            });
+        });
+    </script>
+}

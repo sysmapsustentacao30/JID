@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fab fa-atlassian"></i> Integração Prudential</h3>
+                </div>
+                <div class="card-body">
+                    <p>Integração para criação e movimentação de issues com base na planilha wex(Prudential).</p>
+                    <!-- Button trigger modal Prudential -->
+                    <a href="@Url.Action("UploadExcel","Prudential")" class="btn btn-primary">Iniciar</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3><i class="fas fa-robot"></i> Automação ICCID</h3>
+                </div>
+                <div class="card-body">
+                    <p>Automatização do processo de validação dos ICCID para a release da vivo.</p>
+                    <a href="@Url.Action("UploadExcel","ICCID")" class="btn btn-primary">Iniciar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
