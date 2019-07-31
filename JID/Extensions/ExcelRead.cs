@@ -94,65 +94,10 @@ namespace JID.Extensions
         }
         #endregion
 
-        #region Lendo planilha com lista de iccids
-        public List<IccidModel> ReadICCIDXls(IFormFile file, int qtdRow)
-        {
-            List<IccidModel> iccidList = new List<IccidModel>();
-
-            string webRootPath = _hostingEnvironment.WebRootPath;
-            StringBuilder sb = new StringBuilder();
-            if (file.Length > 0)
-            {
-                string sFileExtension = Path.GetExtension(file.FileName).ToLower();
-                ISheet sheet;
-                string fullPath = Path.Combine(webRootPath, file.FileName);
-                using (var stream = new FileStream(fullPath, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                    stream.Position = 0;
-                    if (sFileExtension == ".xls")
-                    {
-                        HSSFWorkbook hssfwb = new HSSFWorkbook(stream); //This will read the Excel 97-2000 formats  
-                        sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook  
-                    }
-                    else
-                    {
-                        XSSFWorkbook hssfwb = new XSSFWorkbook(stream); //This will read 2007 Excel format  
-                        sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook   
-                    }
-
-                    IRow headerRow = sheet.GetRow(0); //Get Header Row
-
-                    for (int i = (sheet.FirstRowNum + 1); i <= qtdRow; i++) //Read Excel File
-                    {
-                        IRow row = sheet.GetRow(i);
-
-                        IccidModel iccid = new IccidModel
-                        {
-                            NumIccid = row.GetCell(0).ToString(),
-                            Disponivel = false
-                           
-                        };
-
-                        iccidList.Add(iccid);
-                    }
-
-                    stream.Dispose();
-                }
-
-                //Deleta arquivo criado
-                FileInfo fileInfo = new FileInfo(Path.Combine(webRootPath, file.FileName));
-                fileInfo.Delete();
-            }
-
-            return iccidList;
-        }
-        #endregion
     }
 
     public interface IExcelRead
     {
         List<WexPlan> ReadWexXls(IFormFile file);
-        List<IccidModel> ReadICCIDXls(IFormFile file, int qtdRow);
     }
 }
