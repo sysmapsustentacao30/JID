@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using JID.Extensions;
 using JID.Models;
-using KissLog;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace JID.Controllers
 {
@@ -23,7 +23,7 @@ namespace JID.Controllers
         readonly string username;
         readonly string password;
 
-        public PrudentialController(IJiraConn jiraConn,IExcelRead excelRead, ILogger logger,IConfiguration configuration)
+        public PrudentialController(IJiraConn jiraConn,IExcelRead excelRead, ILogger<PrudentialController> logger,IConfiguration configuration)
         {
             _excelRead = excelRead;
             _jiraConn = jiraConn;
@@ -47,7 +47,7 @@ namespace JID.Controllers
         [HttpPost]
         public IActionResult UploadExcel(IFormFile file)
         {
-            _logger.Info($"Prudential Automation Started - {DateTime.Now}");
+            _logger.LogInformation($"Prudential Automation Started - {DateTime.Now}");
 
             if(file is null)
             {
@@ -71,10 +71,10 @@ namespace JID.Controllers
             catch(Exception ex)
             {
                 ViewBag.Upload = false;
-                _logger.Error(ex.ToString());
+                _logger.LogError(ex.Message);
             }
 
-            _logger.Info($"Prudential Automation Finished - {DateTime.Now}");
+            _logger.LogInformation($"Prudential Automation Finished - {DateTime.Now}");
             return View();
         }
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace JID
 {
@@ -14,11 +15,31 @@ namespace JID
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            // Configure Serilog for logging
+            Log.Logger = new LoggerConfiguration()
+           .Enrich.FromLogContext()
+           .WriteTo.Console()
+           .CreateLogger();
+
+            try
+            {
+                Log.Information("Starting Amplifier web host");
+                BuildWebHost(args).Run();
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Host terminated unexpectedly");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .UseSerilog()
+                .Build();
     }
 }

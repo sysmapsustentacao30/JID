@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using JID.Config;
-using KissLog.Apis.v1.Listeners;
-using KissLog.AspNetCore;
+﻿using JID.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -53,14 +47,6 @@ namespace JID
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            #if !DEBUG
-            app.UseKissLogMiddleware(options => {
-                options.Listeners.Add(new KissLogApiListener(new KissLog.Apis.v1.Auth.Application(
-                    Configuration["KissLog.OrganizationId"],
-                    Configuration["KissLog.ApplicationId"])
-                ));
-            });
-            #endif
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
